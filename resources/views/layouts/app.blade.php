@@ -16,6 +16,7 @@
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('assets/css/theme.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/toastr.min.css') }}" rel="stylesheet" type="text/css" />
         @yield('css')
     </head>
 
@@ -68,9 +69,6 @@
                                     <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
                                         Settings
                                     </a>
-                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                        <span>Lock Account</span>
-                                    </a>
                                     <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('logout') }}">
                                         <span>Log Out</span>
                                     </a>
@@ -87,14 +85,14 @@
                             
                             <div class="collapse navbar-collapse" id="topnav-menu-content">
                                 <ul class="navbar-nav">
-                                    <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+                                    <li class="nav-item">
                                         <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('home') }}">
                                             <i class="mdi mdi-home-analytics"></i>Dashboard
                                         </a>
                                     </li>
-                                    <li class="nav-item {{ Request::is('/labor*') ? 'active' : '' }}">
-                                        <a class="nav-link {{ Request::is('/labor*') ? 'active' : '' }}" href="{{ route('home') }}">
-                                            <i class="mdi mdi-home-analytics"></i>Dashboard
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ Request::is('labor*') ? 'active' : '' }}" href="{{ route('labor.index') }}">
+                                            <i class="mdi mdi-account-group"></i>Laborer
                                         </a>
                                     </li>
 
@@ -163,6 +161,8 @@
         @yield('js')
         <!-- App js -->
         <script src="{{ asset('assets/js/theme.js') }}"></script>
+        <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
+        {!! Toastr::message() !!}
 
     </body>
 
