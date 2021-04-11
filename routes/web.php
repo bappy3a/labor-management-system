@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaborController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +20,9 @@ Auth::routes(['register' => false]);
 Auth::routes();
 
 Route::group(['middleware'=>['auth']],function(){
-	Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-	Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
-	Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+	Route::get('/', [HomeController::class, 'index'])->name('home');
+	Route::get('/home', [HomeController::class, 'index']);
+	Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 	Route::resource('labor', LaborController::class);
+	Route::resource('project', ProjectController::class);
 });

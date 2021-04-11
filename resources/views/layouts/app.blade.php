@@ -92,7 +92,12 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link {{ Request::is('labor*') ? 'active' : '' }}" href="{{ route('labor.index') }}">
-                                            <i class="mdi mdi-account-group"></i>Laborer
+                                            <i class="mdi mdi-cowboy"></i>Laborer
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ Request::is('project*') ? 'active' : '' }}" href="{{ route('project.index') }}">
+                                            <i class="mdi mdi-boom-gate-up-outline"></i>Project
                                         </a>
                                     </li>
 

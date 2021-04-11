@@ -22,10 +22,10 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
-                            <h4 class="card-title">Laborer List</h4>
+                            <h4 class="card-title">Project List</h4>
                         </div>
                         <div class="col-6">
-                            <a href="{{ route('labor.create') }}" class="btn btn-info float-right"><i class="mdi mdi-plus"></i> Add New</a>
+                            <a href="{{ route('project.create') }}" class="btn btn-info float-right"><i class="mdi mdi-plus"></i> Add New</a>
                         </div>
                     </div>
 
@@ -33,30 +33,32 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Type</th>
                                 <th>Name</th>
-                                <th>Mobile</th>
-                                <th>Nid No</th>
-                                <th>Salary</th>
-                                <th>Other Info</th>
-                                <th>Action</th>
+                                <th>Companyr Name</th>
+                                <th>Location</th>
+                                <th>Rate</th>
+                                <th>Strat Date</th>
+                                <th>End Date</th>
+                                <th width="12%"> Action</th>
                             </tr>
                         </thead>
                     
                     
                         <tbody>
-                            @foreach($labors as $key=>$labor)
+                            @foreach($projects as $key=>$project)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $labor->type }}</td>
-                                    <td>{{ $labor->name }}</td>
-                                    <td>{{ $labor->number }}</td>
-                                    <td>{{ $labor->nid }}</td>
-                                    <td>Tk {{ $labor->salay }}</td>
-                                    <td>{{ $labor->other }}</td>
+                                    <td>{{ $project->name }}</td>
+                                    <td>{{ $project->companyr_name }}</td>
+                                    <td>{{ $project->location }}</td>
+                                    <td>Tk {{ $project->rate }}</td>
+                                    <td>{{ $project->strat_date }}</td>
+                                    <td>{{ $project->end_date }}</td>
                                     <td>
-                                        <a href="{{ route('labor.edit', $labor->id) }}" class="btn btn-sm btn-primary" style="float: left;margin-right: 2px;"><i class="mdi mdi-square-edit-outline"></i></a>
-                                        <form action="{{ route('labor.destroy', $labor->id) }}" method="post">
+                                        <a href="{{ route('project.show', $project->id) }}" class="btn btn-sm btn-success" style="float: left;margin-right: 2px;"><i class="mdi mdi-eye-outline"></i></a>
+
+                                        <a href="{{ route('project.edit', $project->id) }}" class="btn btn-sm btn-primary" style="float: left;margin-right: 2px;"><i class="mdi mdi-square-edit-outline"></i></a>
+                                        <form action="{{ route('project.destroy', $project->id) }}" method="post">
                                             @method("DELETE")
                                             @csrf
                                             <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this item?')"  class="dropdown-item"> <i class="mdi mdi-delete-forever"></i></button>

@@ -19,7 +19,7 @@ class CreateLaborsTable extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('nid');
-            $table->double('salary', 8, 2)->dafault();
+            $table->double('salary', 8, 2)->dafault(0.00);
             $table->text('other')->nullable();
             $table->timestamps();
         });
