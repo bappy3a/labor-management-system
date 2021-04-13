@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Laborer')
+@section('title','Project')
 
 @section('css')
     <link href="{{ asset('plugins/datatables/dataTables.bootstrap4.css') }}" type="text/css" />

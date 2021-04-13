@@ -25,4 +25,5 @@ Route::group(['middleware'=>['auth']],function(){
 	Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 	Route::resource('labor', LaborController::class);
 	Route::resource('project', ProjectController::class);
+	Route::post('project/work', [ProjectController::class,'project_work'])->name('project.work');
 });

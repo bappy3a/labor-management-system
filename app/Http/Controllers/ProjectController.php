@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Labor;
 use App\Models\Project;
+use App\Models\ProjectDetail;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
@@ -70,7 +72,8 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        $labors = Labor::all();
+        return view('project.view',compact('project','labors'));
     }
 
     /**
@@ -129,4 +132,19 @@ class ProjectController extends Controller
         Toastr::success('Data successfully delete', 'Success');
         return redirect()->route('project.index');
     }
+
+    public function project_work(Request $request)
+    {
+        $date = New ProjectDetail;
+        $date->project_id = $request->project_id;
+        $date->name = $request->name;
+        $date->strat_date = $request->strat_date;
+        $date->end_date = $request->end_date;
+        $date->description = $request->description;
+        $date->labor_id = json_encode($request->labor_id);
+        $date->save();
+        Toastr::success('Data successfully added', 'Success');
+        return back();
+    }
+
 }
