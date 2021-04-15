@@ -106,7 +106,7 @@
                     </div>
                     <div class="col-md-6">
                         <h4 class="card-title">Work list in project</h4>
-                        @foreach(\App\Models\ProjectDetail::orderBy('created_at', 'ASC')->get() as $detail)
+                        @foreach(\App\Models\ProjectDetail::where('project_id',$project->id)->orderBy('created_at', 'ASC')->get() as $detail)
                         <div class="card text-white bg-dark">
                             <div class="card-body">
                                 <blockquote class="card-bodyquote mb-0">

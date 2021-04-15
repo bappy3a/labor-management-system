@@ -36,7 +36,7 @@
                                 <th>Name</th>
                                 <th>Companyr Name</th>
                                 <th>Location</th>
-                                <th>Rate</th>
+                                <th>Budget</th>
                                 <th>Strat Date</th>
                                 <th>End Date</th>
                                 <th width="12%"> Action</th>
@@ -51,7 +51,7 @@
                                     <td>{{ $project->name }}</td>
                                     <td>{{ $project->companyr_name }}</td>
                                     <td>{{ $project->location }}</td>
-                                    <td>Tk {{ $project->rate }}</td>
+                                    <td>Tk {{ $project->budget }}</td>
                                     <td>{{ $project->strat_date }}</td>
                                     <td>{{ $project->end_date }}</td>
                                     <td>
