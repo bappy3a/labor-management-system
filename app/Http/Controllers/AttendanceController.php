@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Project;
+use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -14,7 +17,27 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+
+        $attendances = Attendance::whereDate('date','=', date('Y-m-d'))->get();
+        if (count($attendances) == 0) {
+            $projects = Project::whereDate('strat_date','<=', date('Y-m-d'))->whereDate('end_date','>=', date('Y-m-d'))->get();
+            foreach ($projects as $project) {
+                foreach ($project->projectDetails as $projectDetails) {
+                    foreach (json_decode($projectDetails->labor_id) as $id) {
+                        $attendance = New Attendance;
+                        $attendance->project_id = $projectDetails->project_id;
+                        $attendance->labor_id = $id;
+                        $attendance->date = date('Y-m-d');
+                        $attendance->attendances = 0;
+                        $attendance->save();
+                    }
+                }
+            }
+            $attendances = Attendance::whereDate('date','=', date('Y-m-d'))->get();
+            return view('attendance.index',compact('attendances'));
+        }else{
+            return view('attendance.index',compact('attendances'));
+        }
     }
 
     /**
@@ -24,7 +47,7 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        //
+        return view('attendance.create');
     }
 
     /**
@@ -57,7 +80,7 @@ class AttendanceController extends Controller
      */
     public function edit(Attendance $attendance)
     {
-        //
+        return view('attendance.edit',compact('attendance'));
     }
 
     /**
@@ -81,5 +104,23 @@ class AttendanceController extends Controller
     public function destroy(Attendance $attendance)
     {
         //
+    }
+
+    public function absent($id)
+    {
+        $attendance = Attendance::find($id);
+        $attendance->attendances = 1;
+        $attendance->save();
+        Toastr::success('This labor is absent', 'Success');
+        return back();
+    }
+
+    public function present($id)
+    {
+        $attendance = Attendance::find($id);
+        $attendance->attendances = 0;
+        $attendance->save();
+        Toastr::success('This labor is present', 'Success');
+        return back();
     }
 }

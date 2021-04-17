@@ -5,6 +5,7 @@
 @section('css')
     <link href="{{ asset('plugins/datatables/dataTables.bootstrap4.css') }}" type="text/css" />
     <link href="{{ asset('plugins/datatables/responsive.bootstrap4.css') }}" type="text/css" />
+    <link href="{{ asset('plugins/switchery/switchery.min.css') }}" type="text/css" />
     <style>
         div#basic-datatable_paginate{
             float: right;
@@ -22,45 +23,36 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
-                            <h4 class="card-title">Laborer List</h4>
+                            <h4 class="card-title">Attendance List</h4>
                         </div>
                         <div class="col-6">
-                            <a href="{{ route('labor.create') }}" class="btn btn-info float-right"><i class="mdi mdi-plus"></i> Add New</a>
+                            <h4 class="card-title float-right">To Day Date : {{ date('d/m/Y') }}</h4>
                         </div>
                     </div>
 
                     <table id="basic-datatable" class="table dt-responsive nowrap">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Type</th>
-                                <th>Name</th>
-                                <th>Mobile</th>
-                                <th>Nid No</th>
-                                <th>Salary</th>
-                                <th>Other Info</th>
-                                <th width="10%">Action</th>
+                                <th width="10%">#</th>
+                                <th width="20%">Project</th>
+                                <th>Labor</th>
+                                <th width="10%">Attendance</th>
                             </tr>
                         </thead>
                     
                     
                         <tbody>
-                            @foreach($labors as $key=>$labor)
+                            @foreach($attendances as $key=>$attendance)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $labor->type }}</td>
-                                    <td>{{ $labor->name }}</td>
-                                    <td>{{ $labor->phone }}</td>
-                                    <td>{{ $labor->nid }}</td>
-                                    <td>Tk {{ $labor->salary }}</td>
-                                    <td>{{ $labor->other }}</td>
+                                    <td>{{ $attendance->project->name }}</td>
+                                    <td>{{ $attendance->labor->name }}</td>
                                     <td>
-                                        <a href="{{ route('labor.edit', $labor->id) }}" class="btn btn-sm btn-primary" style="float: left;margin-right: 2px;"><i class="mdi mdi-square-edit-outline"></i></a>
-                                        <form action="{{ route('labor.destroy', $labor->id) }}" method="post">
-                                            @method("DELETE")
-                                            @csrf
-                                            <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this item?')"  class="dropdown-item"> <i class="mdi mdi-delete-forever"></i></button>
-                                        </form>
+                                        @if($attendance->attendances == 0)
+                                            <a href="{{ route('attendance.absent',$attendance->id) }}" onclick="return confirm('Are you sure you?')"  class="btn btn-danger btn-sm"> Absent</a>
+                                        @else
+                                            <a href="{{ route('attendance.present',$attendance->id) }}" onclick="return confirm('Are you sure you?')"  class="btn btn-success btn-sm"> Present</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -78,5 +70,12 @@
     <script src="{{ asset('plugins/datatables/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ asset('plugins/datatables/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/switchery/switchery.min.js') }}"></script>
     <script src="{{ asset('assets/pages/datatables-demo.js') }}"></script>
+    <script src="{{ asset('assets/pages/advanced-plugins-demo.js') }}"></script>
+    <script>
+        jQuery("input[type='checkbox']").change(function() {
+            jQuery("#attendanceFrom").submit();
+        });
+    </script>
 @endsection

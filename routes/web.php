@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaborController;
@@ -28,4 +29,6 @@ Route::group(['middleware'=>['auth']],function(){
 	Route::resource('project', ProjectController::class);
 	Route::post('project/work', [ProjectController::class,'project_work'])->name('project.work');
 	Route::resource('attendance', AttendanceController::class);
+	Route::get('attendance/absent/{id}', [AttendanceController::class,'absent'])->name('attendance.absent');
+	Route::get('attendance/present/{id}', [AttendanceController::class,'present'])->name('attendance.present');
 });

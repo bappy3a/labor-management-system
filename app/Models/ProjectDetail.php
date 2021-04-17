@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectDetail extends Model
 {
     use HasFactory;
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class)->whereDate('strat_date','<=', date('Y-m-d'))->whereDate('end_date','>=', date('Y-m-d'));
+    }
 }

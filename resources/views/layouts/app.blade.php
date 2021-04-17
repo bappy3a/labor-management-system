@@ -101,7 +101,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link {{ Request::is('attendance*') ? 'active' : '' }}" href="{{ route('project.index') }}">
+                                        <a class="nav-link {{ Request::is('attendance*') ? 'active' : '' }}" href="{{ route('attendance.index') }}">
                                             <i class="mdi mdi-check-network-outline"></i>Attendance
                                         </a>
                                     </li>
