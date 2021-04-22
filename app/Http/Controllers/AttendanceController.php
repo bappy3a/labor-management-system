@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\Project;
+use App\Models\Salary;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class AttendanceController extends Controller
     public function index()
     {
 
-        $attendances = Attendance::whereDate('date','=', date('Y-m-d'))->get();
+        $attendances = Attendance::whereDate('date', date('Y-m-d'))->get();
         if (count($attendances) == 0) {
             $projects = Project::whereDate('strat_date','<=', date('Y-m-d'))->whereDate('end_date','>=', date('Y-m-d'))->get();
             foreach ($projects as $project) {
@@ -26,6 +27,7 @@ class AttendanceController extends Controller
                     foreach (json_decode($projectDetails->labor_id) as $id) {
                         $attendance = New Attendance;
                         $attendance->project_id = $projectDetails->project_id;
+                        $attendance->project_detail = $projectDetails->id;
                         $attendance->labor_id = $id;
                         $attendance->date = date('Y-m-d');
                         $attendance->attendances = 0;
@@ -33,7 +35,7 @@ class AttendanceController extends Controller
                     }
                 }
             }
-            $attendances = Attendance::whereDate('date','=', date('Y-m-d'))->get();
+            $attendances = Attendance::whereDate('date', date('Y-m-d'))->get();
             return view('attendance.index',compact('attendances'));
         }else{
             return view('attendance.index',compact('attendances'));
@@ -108,9 +110,31 @@ class AttendanceController extends Controller
 
     public function absent($id)
     {
+
         $attendance = Attendance::find($id);
         $attendance->attendances = 1;
         $attendance->save();
+
+        $old = Salary::where('labor_id',$attendance->labor_id)->first();
+        if ($old) {
+            $old->salary =  $old->salary + $attendance->labor->salary;
+            $old->khoraki = $old->khoraki+100;
+            $old->payable = $old->payable + $attendance->labor->salary + 100;
+            $old->status = 'due';
+            $old->save();
+        }else{
+            $salary = New Salary;
+            $salary->labor_id = $attendance->labor_id;
+            $salary->project_id = $attendance->project_id;
+            $salary->project_detail = $attendance->project_detail;
+            $salary->khoraki = 100;
+            $salary->salary =  $attendance->labor->salary;
+            $salary->payable = $salary->payable + $attendance->labor->salary + 100;
+            $salary->pay = 0;
+            $salary->status = 'due';
+            $salary->save();
+        }
+
         Toastr::success('This labor is absent', 'Success');
         return back();
     }
@@ -120,6 +144,12 @@ class AttendanceController extends Controller
         $attendance = Attendance::find($id);
         $attendance->attendances = 0;
         $attendance->save();
+        $old = Salary::where('labor_id',$attendance->labor_id)->first();
+        if ($old) {
+            $salary->salary =  $salary->salary - $attendance->labor->salary;
+            $salary->status = 'due';
+            $salary->save();
+        }
         Toastr::success('This labor is present', 'Success');
         return back();
     }

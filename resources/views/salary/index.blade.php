@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
-                            <h4 class="card-title">Attendance List</h4>
+                            <h4 class="card-title">Salary List</h4>
                         </div>
                         <div class="col-6">
                             <h4 class="card-title float-right">To Day Date : {{ date('d/m/Y') }}</h4>
@@ -32,28 +32,34 @@
 
                     <table id="basic-datatable" class="table dt-responsive nowrap">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th width="10%">#</th>
-                                <th width="20%">Project</th>
-                                <th width="20%">Work</th>
                                 <th>Labor</th>
-                                <th width="10%">Attendance</th>
+                                <th>Khoraki</th>
+                                <th>Salary</th>
+                                <th>Total Payable</th>
+                                <th>Total Pay</th>
+                                <th>Status</th>
+                                <th width="10%">Pay Now</th>
                             </tr>
                         </thead>
                     
                     
-                        <tbody>
-                            @foreach($attendances as $key=>$attendance)
+                        <tbody class="text-center">
+                            @foreach($salarys as $key=>$salary)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $attendance->project->name }}</td>
-                                    <td>{{ $attendance->projectDetail->name }}</td>
-                                    <td>{{ $attendance->labor->name }}</td>
+                                    <td>{{ $salary->labor->name }}</td>
+                                    <td>Tk .{{ $salary->khoraki }}</td>
+                                    <td>Tk .{{ $salary->salary }}</td>
+                                    <td>Tk .{{ $salary->payable }}</td>
+                                    <td>Tk .{{ $salary->pay }}</td>
+                                    <td>{{ $salary->status }}</td>
                                     <td>
-                                        @if($attendance->attendances == 0)
-                                            <a href="{{ route('attendance.absent',$attendance->id) }}" onclick="return confirm('Are you sure you?')"  class="btn btn-danger btn-sm"> Absent</a>
+                                        @if($salary->payable < $salary->pay)
+                                            <button onclick="show_salary_mode({{ $salary->id }})" class="btn btn-sm btn-success">Salary Pay</button>
                                         @else
-                                            <a href="{{ route('attendance.present',$attendance->id) }}" onclick="return confirm('Are you sure you?')"  class="btn btn-success btn-sm"> Present</a>
+                                            <button class="btn btn-sm btn-success waves-effect waves-light" disabled>Salary Pay</button>
                                         @endif
                                     </td>
                                 </tr>
@@ -65,6 +71,15 @@
             </div> <!-- end card -->
         </div><!-- end col-->
     </div>
+
+    <div id="order_model" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalPopoversLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="salary-modal-body">
+                
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('js')
@@ -79,5 +94,15 @@
         jQuery("input[type='checkbox']").change(function() {
             jQuery("#attendanceFrom").submit();
         });
+
+        function show_salary_mode(id)
+        {
+            console.log(id);
+            $('#salary-modal-body').html(null);
+            $.post('{{ route('salary.model') }}', { _token : '{{ @csrf_token() }}', id : id}, function(data){
+                $('#salary-modal-body').html(data);
+                $('#order_model').modal();
+            });
+        }
     </script>
 @endsection

@@ -16,6 +16,7 @@ class CreateAttendancesTable extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->integer('project_id');
+            $table->integer('project_detail');
             $table->integer('labor_id');
             $table->date('date');
             $table->integer('attendances')->default(0);

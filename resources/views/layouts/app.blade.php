@@ -8,6 +8,7 @@
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="MyraStudio" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
@@ -103,6 +104,11 @@
                                     <li class="nav-item">
                                         <a class="nav-link {{ Request::is('attendance*') ? 'active' : '' }}" href="{{ route('attendance.index') }}">
                                             <i class="mdi mdi-check-network-outline"></i>Attendance
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ Request::is('salary*') ? 'active' : '' }}" href="{{ route('salary.index') }}">
+                                            <i class="mdi mdi-bank-outline"></i>Salary
                                         </a>
                                     </li>
 

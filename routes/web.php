@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaborController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SalaryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +32,6 @@ Route::group(['middleware'=>['auth']],function(){
 	Route::resource('attendance', AttendanceController::class);
 	Route::get('attendance/absent/{id}', [AttendanceController::class,'absent'])->name('attendance.absent');
 	Route::get('attendance/present/{id}', [AttendanceController::class,'present'])->name('attendance.present');
+	Route::resource('salary', SalaryController::class);
+	Route::any('salary/model/shows', [SalaryController::class,'salarymodel'])->name('salary.model');
 });
