@@ -9,12 +9,12 @@
     @method('PUT')
     <div class="modal-body">
         <div class="form-group">
-            <label>Salary Tk.{{ $salary->payable }}</label>
-            <input name="payable" type="number" step="0.01" class="form-control" placeholder="Salary pay {{ $salary->payable }}" required>
+            <label>Due Salary (Tk.{{ $salary->payable - $salary->pay }})</label>
+            <input name="payable" type="number" step="0.01" class="form-control" placeholder="Salary pay {{ $salary->payable - $salary->pay }}" required>
         </div>                             
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+        <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
     </div>
 </form>

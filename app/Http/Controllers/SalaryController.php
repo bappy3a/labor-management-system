@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SalaryDetails;
 use App\Models\Salary;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -76,6 +77,10 @@ class SalaryController extends Controller
             $salary->status = 'paid';
         }
         $salary->save();
+        $salarydetails = New SalaryDetails;
+        $salarydetails->labor_id = $salary->labor_id;
+        $salarydetails->pay = $request->payable;
+        $salarydetails->save();
         Toastr::success('salary is paid', 'Success');
         return back();
     }

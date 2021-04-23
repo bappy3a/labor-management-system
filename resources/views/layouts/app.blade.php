@@ -55,21 +55,6 @@
                                     <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                        <span>Inbox</span>
-                                        <span>
-                                            <span class="badge badge-pill badge-info">3</span>
-                                        </span>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                        <span>Profile</span>
-                                        <span>
-                                            <span class="badge badge-pill badge-warning">1</span>
-                                        </span>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                        Settings
-                                    </a>
                                     <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('logout') }}">
                                         <span>Log Out</span>
                                     </a>
@@ -110,6 +95,17 @@
                                         <a class="nav-link {{ Request::is('salary*') ? 'active' : '' }}" href="{{ route('salary.index') }}">
                                             <i class="mdi mdi-bank-outline"></i>Salary
                                         </a>
+                                    </li>
+                                    
+                                    <li class="nav-item dropdown {{ Request::is('report*') ? 'active' : '' }}">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-charts" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="mdi mdi-poll"></i>Reports <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-charts">
+                                            <a href="{{ route('report.labor') }}" class="dropdown-item {{ Request::is('report/labor') ? 'active' : '' }}">Labor Report</a>
+                                            <a href="{{ route('report.project') }}" class="dropdown-item {{ Request::is('report/project') ? 'active' : '' }}">Project Report</a>
+                                            <a href="{{ route('report.salary') }}" class="dropdown-item {{ Request::is('report/salary') ? 'active' : '' }}">Salary Report</a>
+                                        </div>
                                     </li>
 
                                 </ul>

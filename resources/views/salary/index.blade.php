@@ -38,6 +38,7 @@
                                 <th>Khoraki</th>
                                 <th>Salary</th>
                                 <th>Total Payable</th>
+                                <th>Due Salary</th>
                                 <th>Total Pay</th>
                                 <th>Status</th>
                                 <th width="10%">Pay Now</th>
@@ -47,16 +48,17 @@
                     
                         <tbody class="text-center">
                             @foreach($salarys as $key=>$salary)
-                                <tr>
+                                <tr >
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $salary->labor->name }}</td>
-                                    <td>Tk .{{ $salary->khoraki }}</td>
+                                    <td>Tk .100 Par Day</td>
                                     <td>Tk .{{ $salary->salary }}</td>
                                     <td>Tk .{{ $salary->payable }}</td>
+                                    <td class="{{ $salary->payable > $salary->pay ? 'table-danger' : 'table-success' }}">Tk .{{ $salary->payable - $salary->pay }}</td>
                                     <td>Tk .{{ $salary->pay }}</td>
                                     <td>{{ $salary->status }}</td>
                                     <td>
-                                        @if($salary->payable < $salary->pay)
+                                        @if($salary->payable > $salary->pay)
                                             <button onclick="show_salary_mode({{ $salary->id }})" class="btn btn-sm btn-success">Salary Pay</button>
                                         @else
                                             <button class="btn btn-sm btn-success waves-effect waves-light" disabled>Salary Pay</button>

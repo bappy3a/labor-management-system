@@ -3,12 +3,12 @@
 @section('content')
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-3"></div>
+        <div class="col-6">
             <div class="d-flex align-items-center min-vh-100">
                 <div class="w-100 d-block bg-white shadow-lg rounded my-5">
                     <div class="row">
-                        <div class="col-lg-5 d-none d-lg-block bg-login rounded-left"></div>
-                        <div class="col-lg-7">
+                        <div class="col-lg-12">
                             <div class="p-5">
                                 <div class="text-center mb-5">
                                     <a href="{{ route('home') }}" class="text-dark font-size-22 font-family-secondary">

@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaborController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SalaryController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['register' => false]);
 Auth::routes();
 
-Route::group(['middleware'=>['auth']],function(){
+Route::group(['middleware'=>['auth'/*,'admin'*/]],function(){
 	Route::get('/', [HomeController::class, 'index'])->name('home');
 	Route::get('/home', [HomeController::class, 'index']);
 	Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -34,4 +35,7 @@ Route::group(['middleware'=>['auth']],function(){
 	Route::get('attendance/present/{id}', [AttendanceController::class,'present'])->name('attendance.present');
 	Route::resource('salary', SalaryController::class);
 	Route::any('salary/model/shows', [SalaryController::class,'salarymodel'])->name('salary.model');
+	Route::get('report/labor', [ReportController::class,'labor'])->name('report.labor');
+	Route::get('report/project', [ReportController::class,'project'])->name('report.project');
+	Route::get('report/salary', [ReportController::class,'salary'])->name('report.salary');
 });
