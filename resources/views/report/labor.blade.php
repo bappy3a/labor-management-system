@@ -4,7 +4,11 @@
 
 @section('content')
 
-
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-info float-right mb-2" onclick="window.print()"><i class="mdi mdi-printer"></i> Print </button>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-6 col-xl-3">
         <div class="card">
