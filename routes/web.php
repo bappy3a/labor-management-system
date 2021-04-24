@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['register' => false]);
 Auth::routes();
 
-Route::group(['middleware'=>['auth'/*,'admin'*/]],function(){
+Route::group(['middleware'=>['auth','admin']],function(){
 	Route::get('/', [HomeController::class, 'index'])->name('home');
 	Route::get('/home', [HomeController::class, 'index']);
 	Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

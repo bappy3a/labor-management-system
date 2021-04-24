@@ -146,9 +146,9 @@ class AttendanceController extends Controller
         $attendance->save();
         $old = Salary::where('labor_id',$attendance->labor_id)->first();
         if ($old) {
-            $salary->salary =  $salary->salary - $attendance->labor->salary;
-            $salary->status = 'due';
-            $salary->save();
+            $old->salary =  $old->salary - $attendance->labor->salary;
+            $old->status = 'due';
+            $old->save();
         }
         Toastr::success('This labor is present', 'Success');
         return back();

@@ -16,7 +16,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (date("Y-m-d") >= '2021-04-24') {
+        if (date("Y-m-d") >= '2021-04-26') {
             abort(404);
         }else{
             return $next($request);
