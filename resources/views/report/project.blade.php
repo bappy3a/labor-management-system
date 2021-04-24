@@ -9,7 +9,9 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-
+                <div>
+                    <button class="btn btn-info float-right mb-2" onclick="window.print()"><i class="mdi mdi-printer"></i> Print </button>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-centered table-striped table-nowrap mb-0">
                         <thead>

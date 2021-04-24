@@ -9,7 +9,14 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title d-inline-block">Total Revenue</h4>
+                <div class="row">
+                    <div class="col-6">
+                        <h4 class="card-title d-inline-block">Total Revenue</h4>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-info float-right" onclick="window.print()"><i class="mdi mdi-printer"></i> Print </button>
+                    </div>
+                </div>
 
                 <div id="morris-salary" class="morris-chart" style="height: 290px;"></div>
 
@@ -30,6 +37,7 @@
         <!--end card-->
     </div>
 </div>
+
 <!-- end row-->
 @endsection
 
