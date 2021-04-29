@@ -72,10 +72,7 @@ class SalaryController extends Controller
      */
     public function update(Request $request, Salary $salary)
     {
-        $salary->pay = $request->payable;
-        if ($salary->payable = $request->payable) {
-            $salary->status = 'paid';
-        }
+        $salary->pay = $salary->pay + $request->payable;
         $salary->save();
         $salarydetails = New SalaryDetails;
         $salarydetails->labor_id = $salary->labor_id;

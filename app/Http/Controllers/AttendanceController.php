@@ -153,4 +153,15 @@ class AttendanceController extends Controller
         Toastr::success('This labor is present', 'Success');
         return back();
     }
+
+    public function overtime(Request $request)
+    {
+        $old = Salary::where('labor_id',$request->labor_id)->first();
+        $old->payable = $old->payable + $request->overtime;
+        $old->overtime = $old->overtime + $request->overtime;
+        $old->status = 'due';
+        $old->save();
+        Toastr::success('overtime is seet', 'Success');
+        return back();
+    }
 }

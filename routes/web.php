@@ -33,6 +33,7 @@ Route::group(['middleware'=>['auth','admin']],function(){
 	Route::resource('attendance', AttendanceController::class);
 	Route::get('attendance/absent/{id}', [AttendanceController::class,'absent'])->name('attendance.absent');
 	Route::get('attendance/present/{id}', [AttendanceController::class,'present'])->name('attendance.present');
+	Route::post('attendance/overtime', [AttendanceController::class,'overtime'])->name('attendance.overtime');
 	Route::resource('salary', SalaryController::class);
 	Route::any('salary/model/shows', [SalaryController::class,'salarymodel'])->name('salary.model');
 	Route::get('report/labor', [ReportController::class,'labor'])->name('report.labor');

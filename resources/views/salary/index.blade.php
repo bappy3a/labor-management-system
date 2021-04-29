@@ -37,6 +37,7 @@
                                 <th>Labor</th>
                                 <th>Khoraki</th>
                                 <th>Salary</th>
+                                <th>OverTime</th>
                                 <th>Total Payable</th>
                                 <th>Due Salary</th>
                                 <th>Total Pay</th>
@@ -53,6 +54,7 @@
                                     <td>{{ $salary->labor->name }}</td>
                                     <td>Tk .100 Par Day</td>
                                     <td>Tk .{{ $salary->salary }}</td>
+                                    <td>Tk .{{ $salary->overtime }}</td>
                                     <td>Tk .{{ $salary->payable }}</td>
                                     <td class="{{ $salary->payable > $salary->pay ? 'table-danger' : 'table-success' }}">Tk .{{ $salary->payable - $salary->pay }}</td>
                                     <td>Tk .{{ $salary->pay }}</td>

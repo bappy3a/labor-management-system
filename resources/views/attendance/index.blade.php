@@ -38,6 +38,7 @@
                                 <th width="20%">Work</th>
                                 <th>Labor</th>
                                 <th width="10%">Attendance</th>
+                                <th width="20%">Overtime (TK)</th>
                             </tr>
                         </thead>
                     
@@ -54,6 +55,18 @@
                                             <a href="{{ route('attendance.absent',$attendance->id) }}" onclick="return confirm('Are you sure you?')"  class="btn btn-danger btn-sm"> Absent</a>
                                         @else
                                             <a href="{{ route('attendance.present',$attendance->id) }}" onclick="return confirm('Are you sure you?')"  class="btn btn-success btn-sm"> Present</a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($attendance->attendances == 1)
+                                            <form class="form-inline" action="{{ route('attendance.overtime') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="labor_id" value="{{ $attendance->labor_id }}">
+                                                <input name="overtime" style="width: 70%;float: left;" type="number" step="0.01" class="form-control  mb-2" placeholder="In Tk">
+                                                <button type="submit" class="btn btn-primary mb-2"><i class="mdi mdi-content-save-outline"></i></button>
+                                            </form>
+                                        @else
+                                            N/A
                                         @endif
                                     </td>
                                 </tr>
