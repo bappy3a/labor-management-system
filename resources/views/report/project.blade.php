@@ -19,6 +19,8 @@
                                 <th>Project Name</th>
                                 <th>Project Work</th>
                                 <th>Budget</th>
+                                <th>Salary</th>
+                                <th>Profit/Loos</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
                             </tr>
@@ -36,6 +38,20 @@
                                 </td>
                                 <td>
                                     Tk.{{ $project->budget }}
+                                </td>
+                                @php
+                                    $salary =  \App\Models\Salary::where('project_id',$project->id)->sum('payable')
+                                @endphp
+                                <td>
+                                    Tk. {{ $salary}}
+                                </td>
+                                <td class="{{ $project->budget < $salary ? 'table-danger' : 'table-success' }}">
+                                    Tk.{{ $project->budget - $salary }} 
+                                    @if($project->budget < $salary)
+                                        <span class="badge badge-pill badge-danger">Loos</span>
+                                    @else
+                                        <span class="badge badge-pill badge-success">Profit</span>
+                                    @endif
                                 </td>
                                 <td>
                                     {{ $project->strat_date }}
