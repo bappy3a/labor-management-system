@@ -10,7 +10,7 @@
     <div class="modal-body">
         <div class="form-group">
             <label>Due Salary (Tk.{{ $salary->payable - $salary->pay }})</label>
-            <input name="payable" type="number" step="0.01" class="form-control" placeholder="Salary pay {{ $salary->payable - $salary->pay }}" required>
+            <input name="payable" type="number" step="0.01" class="form-control" placeholder="Salary pay {{ $salary->payable - $salary->pay }}" required value="{{ $salary->payable - $salary->pay }}">
         </div>                             
     </div>
     <div class="modal-footer">

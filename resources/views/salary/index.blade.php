@@ -52,7 +52,7 @@
                                 <tr >
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $salary->labor->name }}</td>
-                                    <td>Tk .100 Par Day</td>
+                                    <td>Tk. 100 -</td>
                                     <td>Tk .{{ $salary->salary }}</td>
                                     <td>Tk .{{ $salary->overtime }}</td>
                                     <td>Tk .{{ $salary->payable }}</td>

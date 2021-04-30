@@ -119,7 +119,7 @@ class AttendanceController extends Controller
         if ($old) {
             $old->salary =  $old->salary + $attendance->labor->salary;
             $old->khoraki = $old->khoraki+100;
-            $old->payable = $old->payable + $attendance->labor->salary + 100;
+            $old->payable = $old->payable + $attendance->labor->salary - 100;
             $old->status = 'due';
             $old->save();
         }else{
@@ -130,7 +130,7 @@ class AttendanceController extends Controller
             $salary->khoraki = 100;
             $salary->overtime = 0;
             $salary->salary =  $attendance->labor->salary;
-            $salary->payable = $salary->payable + $attendance->labor->salary + 100;
+            $salary->payable = $attendance->labor->salary - 100;
             $salary->pay = 0;
             $salary->status = 'due';
             $salary->save();
