@@ -128,6 +128,7 @@ class AttendanceController extends Controller
             $salary->project_id = $attendance->project_id;
             $salary->project_detail = $attendance->project_detail;
             $salary->khoraki = 100;
+            $salary->overtime = 0;
             $salary->salary =  $attendance->labor->salary;
             $salary->payable = $salary->payable + $attendance->labor->salary + 100;
             $salary->pay = 0;
