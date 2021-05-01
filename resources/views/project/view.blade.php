@@ -86,7 +86,7 @@
 
                             <div class="form-group">
                                 <label>Select labors</label>
-                                <select name="labor_id[]" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ...">
+                                <select name="labor_id[]" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." required>
                                     @foreach($labors as $labor)
                                     <option value="{{ $labor->id }}">{{ $labor->name }}</option>
                                     @endforeach
