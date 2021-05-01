@@ -148,6 +148,7 @@
 
     <div class="col-lg-3">
 
+        @if(\App\Models\Project::first())
         <div class="card">
             <div class="card-body">
                 <div class="row align-items-center">
@@ -163,6 +164,7 @@
             </div>
             <!--end card body-->
         </div>
+        @endif
         <!--end card-->
 
     </div><!-- end col -->
