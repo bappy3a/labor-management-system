@@ -24,7 +24,7 @@ class AttendanceController extends Controller
         if (count($attendances) == 0) {
             $projects = Project::whereDate('strat_date','<=', date('Y-m-d'))->whereDate('end_date','>=', date('Y-m-d'))->get();
             foreach ($projects as $project) {
-                foreach (ProjectDetail::whereDate('strat_date','<=', date('Y-m-d'))->whereDate('end_date','>=', date('Y-m-d'))->get() as $projectDetails) {
+                foreach (ProjectDetail::where('project_id',$project->id)->whereDate('strat_date','<=', date('Y-m-d'))->whereDate('end_date','>=', date('Y-m-d'))->get() as $projectDetails) {
                     foreach (json_decode($projectDetails->labor_id) as $id) {
                         $attendance = New Attendance;
                         $attendance->project_id = $projectDetails->project_id;
