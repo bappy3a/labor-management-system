@@ -156,7 +156,12 @@ class ProjectController extends Controller
         $date->strat_date = $request->strat_date;
         $date->end_date = $request->end_date;
         $date->description = $request->description;
-        $date->labor_id = json_encode($request->labor_id);
+        if ($request->labor_id) {
+            $date->labor_id = json_encode($request->labor_id);
+        }else{
+            $date->labor_id = [];
+        }
+        
         $date->save();
         Toastr::success('Data successfully added', 'Success');
         return back();
