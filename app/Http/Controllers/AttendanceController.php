@@ -137,7 +137,7 @@ class AttendanceController extends Controller
             $salary->save();
         }
 
-        Toastr::success('This labor is absent', 'Success');
+        Toastr::success('This labor is present', 'Success');
         return back();
     }
 
@@ -152,7 +152,7 @@ class AttendanceController extends Controller
             $old->status = 'due';
             $old->save();
         }
-        Toastr::success('This labor is present', 'Success');
+        Toastr::success('This labor is absent', 'Success');
         return back();
     }
 
