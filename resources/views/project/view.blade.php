@@ -111,7 +111,7 @@
                                 <blockquote class="card-bodyquote mb-0">
                                     <h5 style="color: #fff;">{{ $detail->name }}</h5>
                                     <p>{!! $detail->description !!}</p>
-                                    <footer class="blockquote-footer text-white-50">{{ date('F j, Y', strtotime($project->strat_date)) }} <cite title="Source Title"> <b>To =></b> </cite> {{ date('F j, Y', strtotime($project->strat_date))}}
+                                    <footer class="blockquote-footer text-white-50">{{ date('F j, Y', strtotime($detail->strat_date)) }} <cite title="Source Title"> <b>To =></b> </cite> {{ date('F j, Y', strtotime($detail->end_date))}}
                                     </footer>
                                     <p class="blockquote-footer" style="font-size: 14px;color: #fff;">Labors</p>
                                     @foreach(json_decode($detail->labor_id) as $id)
