@@ -49,7 +49,7 @@
                             <div class="dropdown d-inline-block ml-2">
                                 <button type="button" class="btn header-item waves-effect waves-light"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img class="rounded-circle header-profile-user" src="/assets/images/users/avatar-3.jpg"
+                                    <img class="rounded-circle header-profile-user" src="{{ asset('/assets/images/users/avatar-3.jpg') }}"
                                         alt="Header Avatar">
                                     <span class="d-none d-sm-inline-block ml-1">{{ auth()->user()->name }}</span>
                                     <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>

@@ -64,45 +64,44 @@
                         </div>
                     </div> --}}
                     <div class="col-md-6">
-<form action="{{ route('project.work') }}" method="post">
-    @csrf
-                        
-    <h4 class="card-title">Add a work in project</h4>
-    <input type="hidden" name="project_id" value="{{ $project->id }}">
-    <div class="form-group">
-        <label>Work Name</label>
-        <input placeholder="Work Name" type="text" name="name" class="form-control" maxlength="25" name="defaultconfig" required />
-    </div>
+                        <form action="{{ route('project.work') }}" method="post">
+                            @csrf
+                                                
+                            <h4 class="card-title">Add a work in project</h4>
+                            <input type="hidden" name="project_id" value="{{ $project->id }}">
+                            <div class="form-group">
+                                <label>Work Name</label>
+                                <input placeholder="Work Name" type="text" name="name" class="form-control" maxlength="25" name="defaultconfig" required />
+                            </div>
 
-    <div class="form-group">
-        <label>Strat Date</label>
-        <input type="date" name="strat_date" class="form-control" required />
-    </div>
+                            <div class="form-group">
+                                <label>Strat Date</label>
+                                <input type="date" name="strat_date" class="form-control" required />
+                            </div>
 
-    <div class="form-group">
-        <label>End Date</label>
-        <input type="date" name="end_date" class="form-control" required />
-    </div>
+                            <div class="form-group">
+                                <label>End Date</label>
+                                <input type="date" name="end_date" class="form-control" required />
+                            </div>
 
-    <div class="form-group">
-        <label>Select labors</label>
-        <select name="labor_id[]" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ...">
-            @foreach($labors as $labor)
-            <option value="{{ $labor->id }}">{{ $labor->name }}</option>
-            @endforeach
-        </select>
-    </div>
+                            <div class="form-group">
+                                <label>Select labors</label>
+                                <select name="labor_id[]" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ...">
+                                    @foreach($labors as $labor)
+                                    <option value="{{ $labor->id }}">{{ $labor->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-    <div class="form-group">
-        <label>Description</label>
-        <textarea name="description" placeholder="Description" id="textarea" class="form-control" maxlength="250" rows="3"></textarea>
-    </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea name="description" placeholder="Description" id="textarea" class="form-control" maxlength="250" rows="3"></textarea>
+                            </div>
 
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Added</button>
-    </div>
-</form>
-
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Added</button>
+                            </div>
+                        </form>
                     </div>
                     <div class="col-md-6">
                         <h4 class="card-title">Work list in project</h4>
@@ -116,7 +115,10 @@
                                     </footer>
                                     <p class="blockquote-footer" style="font-size: 14px;color: #fff;">Labors</p>
                                     @foreach(json_decode($detail->labor_id) as $id)
-                                        <span class="badge badge-danger">{{ \App\Models\Labor::find($id)->name }}</span>
+                                        @php
+                                            $labor = \App\Models\Labor::find($id);
+                                        @endphp
+                                        <span class="badge badge-danger">{{ $labor ? $labor->name : '{Deleted labor }' }}</span>
                                     @endforeach
                                 </blockquote>
                             </div>

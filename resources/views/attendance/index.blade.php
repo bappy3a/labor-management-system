@@ -45,31 +45,33 @@
                     
                         <tbody>
                             @foreach($attendances as $key=>$attendance)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $attendance->project->name }}</td>
-                                    <td>{{ $attendance->projectDetail->name }}</td>
-                                    <td>{{ $attendance->labor->name }}</td>
-                                    <td>
-                                        @if($attendance->attendances == 0)
-                                            <a href="{{ route('attendance.absent',$attendance->id) }}" onclick="return confirm('Are you sure you?')"  class="btn btn-danger btn-sm"> Absent</a>
-                                        @else
-                                            <a href="{{ route('attendance.present',$attendance->id) }}" onclick="return confirm('Are you sure you?')"  class="btn btn-success btn-sm"> Present</a>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if($attendance->attendances == 1)
-                                            <form class="form-inline" action="{{ route('attendance.overtime') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="labor_id" value="{{ $attendance->labor_id }}">
-                                                <input name="overtime" style="width: 70%;float: left;" type="number" step="0.01" class="form-control  mb-2" placeholder="In Tk">
-                                                <button type="submit" class="btn btn-primary mb-2"><i class="mdi mdi-content-save-outline"></i></button>
-                                            </form>
-                                        @else
-                                            N/A
-                                        @endif
-                                    </td>
-                                </tr>
+                                @if($attendance->labor)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $attendance->project->name }}</td>
+                                        <td>{{ $attendance->projectDetail->name }}</td>
+                                        <td>{{ $attendance->labor->name }}</td>
+                                        <td>
+                                            @if($attendance->attendances == 0)
+                                                <a href="{{ route('attendance.absent',$attendance->id) }}" onclick="return confirm('Are you sure you?')"  class="btn btn-danger btn-sm"> Absent</a>
+                                            @else
+                                                <a href="{{ route('attendance.present',$attendance->id) }}" onclick="return confirm('Are you sure you?')"  class="btn btn-success btn-sm"> Present</a>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($attendance->attendances == 1)
+                                                <form class="form-inline" action="{{ route('attendance.overtime') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="labor_id" value="{{ $attendance->labor_id }}">
+                                                    <input name="overtime" style="width: 70%;float: left;" type="number" step="0.01" class="form-control  mb-2" placeholder="In Tk">
+                                                    <button type="submit" class="btn btn-primary mb-2"><i class="mdi mdi-content-save-outline"></i></button>
+                                                </form>
+                                            @else
+                                                N/A
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

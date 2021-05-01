@@ -38,11 +38,15 @@
                         </div>
                         <div class="form-group">
                             <label>Area *</label>
-                            <input name="area" value="{{ $project->area }}" type="text" class="form-control" placeholder="Enter area">
+                            <input id="area" name="area" type="number" step="0.01" class="form-control" placeholder="Enter area" autocomplete="off" value="{{ $project->area }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Rate *</label>
+                            <input id="rate" name="rate" type="number" step="0.01" class="form-control" placeholder="Enter rate" autocomplete="off" value="{{ $project->rate }}">
                         </div>
                         <div class="form-group">
                             <label>Budget *</label>
-                            <input name="budget" value="{{ $project->budget }}" type="text" class="form-control" placeholder="Enter budget">
+                            <input id="budget" name="budget" type="number" step="0.01" class="form-control" placeholder="Enter budget" readonly value="{{ $project->budget }}">
                         </div>
                         <div class="form-group">
                             <label>Strat Date *</label>
@@ -51,10 +55,6 @@
                         <div class="form-group">
                             <label>End Date *</label>
                             <input name="end_date" value="{{ $project->end_date }}" type="date" class="form-control" placeholder="Enter end date">
-                        </div>
-                        <div class="form-group">
-                            <label>Rate *</label>
-                            <input name="rate" value="{{ $project->rate }}" type="number" step="0.01" class="form-control" placeholder="Enter rate">
                         </div>
                         <div class="form-group">
                             <label>Description</label>
@@ -71,5 +71,18 @@
     </div>
 @endsection
 
+
+
 @section('js')
+
+<script>
+    $('form').delegate('#area, #rate', 'keyup', function(){
+            var tr = $(this).parent().parent();
+            var rate = document.getElementById("rate").value;
+            var area = document.getElementById("area").value;
+            var budget =  area * rate;
+            $('#budget').val(budget);
+        });
+</script>
+
 @endsection

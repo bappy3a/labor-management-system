@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\Labor;
 use App\Models\Project;
 use App\Models\ProjectDetail;
+use App\Models\Salary;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
@@ -128,6 +130,19 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        $projectdeteles = ProjectDetail::where('project_id',$project->id)->get();
+        foreach ($projectdeteles as $key => $value) {
+            $value->delete();
+        }
+        $salarys = Salary::where('project_id',$project->id)->get();
+        foreach ($salarys as $key => $value) {
+            $value->delete();
+        }
+        $Attendances = Attendance::where('project_id',$project->id)->get();
+        foreach ($Attendances as $key => $value) {
+            $value->delete();
+        }
+
         $project->delete();
         Toastr::success('Data successfully delete', 'Success');
         return redirect()->route('project.index');

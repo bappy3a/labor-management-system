@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Labor;
+use App\Models\Salary;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
@@ -113,6 +114,10 @@ class LaborController extends Controller
      */
     public function destroy(Labor $labor)
     {
+        $salarys = Salary::where('labor_id',$labor->id)->get();
+        foreach ($salarys as $key => $value) {
+            $value->delete();
+        }
         $labor->delete();
         Toastr::success('Data successfully delete', 'Success');
         return redirect()->route('labor.index');
