@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\Project;
+use App\Models\ProjectDetail;
 use App\Models\Salary;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
@@ -23,7 +24,7 @@ class AttendanceController extends Controller
         if (count($attendances) == 0) {
             $projects = Project::whereDate('strat_date','<=', date('Y-m-d'))->whereDate('end_date','>=', date('Y-m-d'))->get();
             foreach ($projects as $project) {
-                foreach ($project->projectDetails as $projectDetails) {
+                foreach (ProjectDetail::whereDate('strat_date','<=', date('Y-m-d'))->whereDate('end_date','>=', date('Y-m-d'))->get() as $projectDetails) {
                     foreach (json_decode($projectDetails->labor_id) as $id) {
                         $attendance = New Attendance;
                         $attendance->project_id = $projectDetails->project_id;
